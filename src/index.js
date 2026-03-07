@@ -1,6 +1,4 @@
 function displayDefination(response) {
-
-    console.log("defination generated")
       new Typewriter('#defination', {
   strings: response.data.answer,
   autoStart: true,
@@ -15,12 +13,13 @@ function generateDefination(event) {
     let userInputElement = document.querySelector("#user-input");
     let apiKey ="31o84e907eeba386aabt3500e710ff10";
     let prompt =`user instruction:Generate a defination of the word ${userInputElement.value}`;
-    let context ="You are knoledgeable and an expect in defining words.Please generate a full defination and sentence example in basic HTML.Do not show the text HTML.make sure to follow the user instructions ";
+    let context ="You are knowledgeable and an expect in defining words.Please generate a full defination and sentence example in basic HTML.Do not show the text HTML.make sure to follow the user instructions. ";
     let apiUrl =`https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-    console.log("generating defination")
-    console.log(`prompt:${prompt}`)
-    console.log(`context:${context}`)
+    let definationElement = document.querySelector("#defination");
+     definationElement.classList.remove("hidden");
+     definationElement.innerHTML = `<div class="blink">Generating defintion for ${userInputElement.value}...</div>`;
+
     axios.get(apiUrl).then(displayDefination);
 }
 
